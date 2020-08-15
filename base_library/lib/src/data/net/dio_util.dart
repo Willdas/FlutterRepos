@@ -288,6 +288,32 @@ class DioUtil {
         options: options);
   }
 
+  Future<BaseRespR> getResponse(
+    String method,
+    String urlPath, {
+    Options options,
+  }) async {
+    Response response =
+        await _dio.request(urlPath, options: _checkOptions(method, options));
+    if (response.statusCode == HttpStatus.ok ||
+        response.statusCode == HttpStatus.created) {
+      try {
+        return new BaseRespR("", 0, "", null, response);
+      } catch (e) {
+        return new Future.error(new DioError(
+          response: response,
+          message: "data parsing exception...",
+          type: DioErrorType.RESPONSE,
+        ));
+      }
+    }
+    return new Future.error(new DioError(
+      response: response,
+      message: "statusCode: $response.statusCode, service error",
+      type: DioErrorType.RESPONSE,
+    ));
+  }
+
   /// decode response data.
   Map<String, dynamic> _decodeData(Response response) {
     if (response == null ||
