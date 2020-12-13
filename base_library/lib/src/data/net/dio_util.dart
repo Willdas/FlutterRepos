@@ -160,6 +160,11 @@ class DioUtil {
     }
   }
 
+  /// set Interceptor
+  void setInterceptor(InterceptorsWrapper interceptor) {
+    _dio.interceptors.add(interceptor);
+  }
+
   /// Make http request with options.
   /// [method] The request method.
   /// [path] The url path.
@@ -422,8 +427,8 @@ class DioUtil {
   static BaseOptions getDefOptions() {
     BaseOptions options = new BaseOptions();
     options.contentType = Headers.formUrlEncodedContentType;
-    options.connectTimeout = 1000 * 30;
-    options.receiveTimeout = 1000 * 30;
+    options.connectTimeout = 1000 * 60 * 10;
+    options.receiveTimeout = 1000 * 60;
     return options;
   }
 }
