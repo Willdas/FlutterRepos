@@ -224,10 +224,24 @@ class DioUtil {
   /// <BaseRespR<T> 返回 status code msg data  Response.
   Future<BaseRespR<T>> requestR<T>(String method, String path,
       {data, Options options, CancelToken cancelToken}) async {
-    Response response = await _dio.request(path,
+    /*Response response = await _dio.request(path,
         data: data,
         options: _checkOptions(method, options),
-        cancelToken: cancelToken);
+        cancelToken: cancelToken);*/
+    Response response;
+    if (Method.get.contains(method)) {
+      response = await _dio.get(
+          path,
+          queryParameters: data,
+          options: _checkOptions(method, options),
+          cancelToken: cancelToken);
+    } else {
+      response = await _dio.post(
+          path,
+          data: data,
+          options: _checkOptions(method, options),
+          cancelToken: cancelToken);
+    }
     _printHttpLog(response);
     String _status;
     int _code;
