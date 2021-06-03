@@ -210,14 +210,14 @@ class DioUtil {
         return new Future.error(new DioError(
           response: response,
           error: "data parsing exception...",
-          type: DioErrorType.RESPONSE,
+          type: DioErrorType.response,
         ));
       }
     }
     return new Future.error(new DioError(
       response: response,
       error: "statusCode: $response.statusCode, service error",
-      type: DioErrorType.RESPONSE,
+      type: DioErrorType.response,
     ));
   }
 
@@ -280,14 +280,14 @@ class DioUtil {
         return new Future.error(new DioError(
           response: response,
           error: "data parsing exception...",
-          type: DioErrorType.RESPONSE,
+          type: DioErrorType.response,
         ));
       }
     }
     return new Future.error(new DioError(
       response: response,
       error: "statusCode: $response.statusCode, service error",
-      type: DioErrorType.RESPONSE,
+      type: DioErrorType.response,
     ));
   }
 
@@ -325,14 +325,14 @@ class DioUtil {
         return new Future.error(new DioError(
           response: response,
           error: "data parsing exception...",
-          type: DioErrorType.RESPONSE,
+          type: DioErrorType.response,
         ));
       }
     }
     return new Future.error(new DioError(
       response: response,
       error: "statusCode: $response.statusCode, service error",
-      type: DioErrorType.RESPONSE,
+      type: DioErrorType.response,
     ));
   }
 
@@ -379,8 +379,8 @@ class DioUtil {
           "\n[statusCode]:   " +
           response.statusCode.toString() +
           "\n[request   ]:   " +
-          _getOptionsStr(response.request));
-      _printDataStr("reqdata ", response.request.data);
+          _getOptionsStr(response.requestOptions));
+      _printDataStr("reqdata ", response.data);
       _printDataStr("response", response.data);
     } catch (ex) {
       print("Http Log" + " error......");
